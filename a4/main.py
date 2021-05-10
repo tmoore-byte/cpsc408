@@ -16,10 +16,10 @@ if __name__ == '__main__':
     #tables.create_tables()
 
     #tests.showT()
-    #tests.drop()
+    # tests.drop()
     #tests.showdb()
 
 
-    print("completed")
+    print("Completed.")
 
 

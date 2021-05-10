@@ -17,7 +17,7 @@ def create_tables():
     mycursor.execute("CREATE TABLE Customers (customerID INT AUTO_INCREMENT PRIMARY KEY, cName VARCHAR(50), email VARCHAR(50), address VARCHAR(100))")
     mycursor.execute("CREATE TABLE Payments (customerID INT AUTO_INCREMENT PRIMARY KEY, paymentAmount INT UNSIGNED, paymentDate DATE)")
     # mycursor.execute("CREATE TABLE CarModels (modelCodeC INT AUTO_INCREMENT PRIMARY KEY, seriesNumber TINYINT UNSIGNED, numInStock SMALLINT UNSIGNED, listPrice INT UNSIGNED)")
-    mycursor.execute("CREATE TABLE Sales(orderNumber INT NOT NULL, modelCode INT NOT NULL, salePrice INT UNSIGNED, saleDate DATE, saleStatus VARCHAR(20), PRIMARY KEY (modelCode), FOREIGN KEY (modelCode) REFERENCES CarModels(modelCodeC)) ")
+    mycursor.execute("CREATE TABLE Sales(orderNumber INT NOT NULL, modelCode INT NOT NULL, salePrice INT UNSIGNED, saleDate DATE, saleStatus VARCHAR(20))")
     mycursor.execute("CREATE TABLE Employees (employeeID INT AUTO_INCREMENT PRIMARY KEY , eName VARCHAR(50), jobTitle VARCHAR(50), salary INT UNSIGNED)")
 
     print("showing tables")
@@ -83,7 +83,10 @@ def fill_data(fileName):
 
             mycursor.execute("INSERT INTO Employees(employeeID, eName, jobTitle, salary) VALUES(%s,%s,%s,%s);", (r["employeeID"], r["eName"], r["jobTitle"], r["salary"]))
             db.commit()
-            print("data imported")
+
+            print("Imported: ", r)
+
+
 
 
 
