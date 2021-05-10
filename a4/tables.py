@@ -18,7 +18,7 @@ def create_tables():
     mycursor.execute("CREATE TABLE Payments (customerID INT AUTO_INCREMENT PRIMARY KEY, paymentAmount INT UNSIGNED, paymentDate DATE)")
     # mycursor.execute("CREATE TABLE CarModels (modelCodeC INT AUTO_INCREMENT PRIMARY KEY, seriesNumber TINYINT UNSIGNED, numInStock SMALLINT UNSIGNED, listPrice INT UNSIGNED)")
     mycursor.execute("CREATE TABLE Sales(orderNumber INT NOT NULL, modelCode INT NOT NULL, salePrice INT UNSIGNED, saleDate DATE, saleStatus VARCHAR(20))")
-    mycursor.execute("CREATE TABLE Employees (employeeID INT AUTO_INCREMENT PRIMARY KEY , eName VARCHAR(50), jobTitle VARCHAR(50), salary INT UNSIGNED)")
+    mycursor.execute("CREATE TABLE Employees (employeeID INT AUTO_INCREMENT PRIMARY KEY, eName VARCHAR(50), jobTitle VARCHAR(50), salary INT UNSIGNED)")
 
     print("showing tables")
     tests.showT()
@@ -42,12 +42,12 @@ def fakeData(fileName, numRecords):
         # using faker to generate data
         fake = Faker()
         w.writerow([
-        fake.random_int(0, 2000),  # orderNumber
+        fake.unique.random_int(),  # orderNumber
         fake.random_int(1, 6),  # seriesNumber
         sales[rSales],  # saleStatus
-        fake.random_int(1, 2000),  # customerID
-        fake.random_int(100, 800),  # modelCodeC
-        fake.random_int(100, 800),  # modelCode
+        fake.unique.random_int(),  # customerID
+        fake.unique.random_int(),  # modelCodeC
+        fake.unique.random_int(),  # modelCode
         fake.random_int(0, 100),  # numInStock
         fake.random_int(9000, 250000),  # listPrice
         fake.random_int(5000, 200000),  # paymentAmount
@@ -57,7 +57,7 @@ def fakeData(fileName, numRecords):
         fake.name(),  # cName
         fake.email(),  # email
         fake.address(),  # address
-        fake.random_int(1, 100),  # employeeID
+        fake.unique.random_int(),  # employeeID
         fake.name(),  # eName
         jobTitles[rJob],  # jobTitle
         fake.random_int(10000, 200000)])  # salary
